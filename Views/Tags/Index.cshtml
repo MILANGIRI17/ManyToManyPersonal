@@ -1,0 +1,32 @@
+@model IEnumerable<Tag>
+<div class="container">
+    <h1>Tag</h1>
+    <partial name="_MessageSummary"/>
+    <hr>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="Tags">Add</a> <br><br>
+    
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Slug</td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="Edit" asp-controller="Tags" class="btn btn-info">Edit</a> ||
+                        <a asp-route-id="@item.Id" asp-controller="Tags" asp-action="Delete"
+                        class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>

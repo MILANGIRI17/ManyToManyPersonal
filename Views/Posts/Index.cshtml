@@ -1,0 +1,42 @@
+@model IEnumerable<Post>
+<div class="container">
+    <h1>Posts</h1>
+    <partial name="_MessageSummary" />
+    <hr>
+    <a class="btn btn-primary" asp-action="Create" asp-controller="Posts">Add</a> <br><br>
+
+    <table class="table table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Categories</th>
+                <th>Tags</th>
+                <th>Post Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Content</td>
+                    <td>
+                        @string.Join(", ",@item.PostCategories.Select(p=>p.Category.Title))
+                    </td>
+                    <td>
+                        @string.Join(", ",@item.PostTags.Select(pt=>pt.Tag.Title))
+                    </td>
+                    <td>@item.PostStatus</td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="Edit" asp-controller="Posts" class="btn btn-info">Edit</a> ||
+                        <a asp-route-id="@item.Id" asp-controller="Posts" asp-action="Delete"
+                        class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
